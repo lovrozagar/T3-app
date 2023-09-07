@@ -1,8 +1,11 @@
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs"
+import { useTheme } from "next-themes"
 import Link from "next/link"
+import ModeSelect from "./mode-select"
 
 const Navbar = () => {
   const user = useUser()
+  const { setTheme } = useTheme()
 
   return (
     <nav className="border-gray-200 bg-white dark:bg-gray-900">
@@ -67,7 +70,10 @@ const Navbar = () => {
               <li>
                 <SignInButton>Sign in</SignInButton>
               </li>
-            )}  
+            )}
+            <li>
+              <ModeSelect />
+            </li>
             <li>
               <span className="hover:cursor-pointer">
                 <UserButton />
