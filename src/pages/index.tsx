@@ -3,10 +3,13 @@ import Head from "next/head"
 // import { api } from "@/utils/api"
 import { Button } from "@/components/ui/button"
 import useCartStore from "./store/store"
+import { SignInButton, SignUpButton, useUser } from "@clerk/nextjs"
 
 export default function Home() {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" })
   const { items, addItem, removeItem } = useCartStore()
+
+  const user = useUser()
 
   return (
     <>
@@ -16,6 +19,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="">
+        {user.isSignedIn ? (
+          <SignUpButton>Sign up</SignUpButton>
+        ) : (
+          <SignInButton>Sign in</SignInButton>
+        )}
         <p>{items}</p>
         <Button onClick={addItem}>add</Button>
         <Button onClick={removeItem}>remove</Button>
