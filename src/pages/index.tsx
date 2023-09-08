@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function Home() {
   const { data: listings } = api.listings.list.useQuery()
@@ -39,7 +40,9 @@ export default function Home() {
                 <p className="mt-2">{item.price}</p>
               </CardContent>
               <CardFooter>
-                <Button>Edit</Button>
+                <Button asChild>
+                  <Link href={`/listings/${item.id}`}>Edit</Link>
+                </Button>
               </CardFooter>
             </Card>
           ))}
